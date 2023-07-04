@@ -1,0 +1,68 @@
+<!-- Employees.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Employees</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Employees</h1>
+     <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Benutzername</th>
+                <th>Password</th>
+                <th>Alter</th>
+                <th>Geschlecht</th>
+                <th>Adresse</th>
+                <th>Qualifikationen</th>
+                <th>Gehalt</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.username}"></td>
+                <td th:text="${employee.password}"></td>
+                <td>
+                    <span th:text="${employee.day}"></span>/<span th:text="${employee.month}"></span>/<span th:text="${employee.year}"></span>
+                </td>
+                <td th:text="${employee.gender}"></td>
+                <td th:text="${employee.address}"></td>
+                <td th:text="${employee.qualifications}"></td>
+                <td th:text="${employee.salary}"></td>
+                <td>
+                    <!-- Löschen Formular -->
+                   <form th:action="@{/employees/{name}(name=${employee.name})}" method="post" style="display: inline;">
+    <input type="hidden" name="_method" value="delete"/>
+    <input type="hidden" name="username" th:value="${employee.username}"/>
+    <input type="hidden" name="password" th:value="${employee.password}"/>
+    <input style="background-color: red;" type="submit" value="Löschen"/>
+</form>
+                    <!-- Bearbeiten Link -->
+                    <a th:href="@{/employees/edit-employee/{name}(name=${employee.name})}">Bearbeiten</a>
+                   
+                    <!-- Add Paycheck Link -->
+                    <a th:href="@{/employees/{name}/add-paycheck(name=${employee.name})}">Gehaltsscheck hinzufügen</a>
+                    <a th:href="@{/employees/{name}/paycheck(name=${employee.name})}">Details zum Gehaltsscheck</a>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/employees/new">Neuen Mitarbeiter hinzufügen</a>
+    <a class="zu" href="/dashboard">Zurück</a>
+</body>
+</html>

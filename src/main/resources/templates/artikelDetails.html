@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Artikeldetails</title>
+	<link rel="stylesheet" th:href="@{/resources/css/style_verkaufsbereich.css}">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/welcome">Startseite</a></li>
+				<li><a href="/artikelListe">Artikelliste</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+		<h2>Artikel Details</h2>
+    <p>Name: <span th:text="${artikel.name}"></span></p>
+    <p>Price: <span th:text="${artikel.price}"></span></p>
+    <p>Beschreibung: <span th:text="${artikel.beschreibung}"></span></p>
+    <p>Bild URL: <span th:text="${artikel.bildUrl}"></span></p>
+    <p>Menge: <span th:text="${quantity}"></span></p>
+    <p>Nachbestellschwelle: <span th:text="${artikel.reorderThreshold}"></span></p>
+    
+    <a href="/artikelListe">Zurück zur Artikelliste</a>
+	<footer>
+		<p>&copy; 2023 Verkaufsbereich</p>
+	</footer>
+</body>
+</html>

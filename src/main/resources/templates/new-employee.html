@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Neuer Angestellter</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+    <style>
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group textarea {
+            width: 250px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group select {
+            width: 70px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            height: 60px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            text-align: right;
+        }
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Neuer Angestellter</h1>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+        <form method="post" th:action="@{/create}" th:object="${employee}">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" th:field="*{name}" required/>
+            </div>
+            <div class="form-group">
+                <label for="age">Alter:</label>
+                <select id="day" name="day">
+                    <option th:each="day : ${#numbers.sequence(1, 31)}" th:value="${day}" th:text="${day}"></option>
+                </select>
+                <select id="month" name="month">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select id="year" name="year">
+                    <option th:each="year : ${#numbers.sequence(1900, 2023)}" th:value="${year}" th:text="${year}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gender">Geschlecht:</label>
+                <select id="gender" name="gender" th:field="*{gender}">
+                    <option value="Männlich">Männlich</option>
+                    <option value="Weiblich">Weiblich</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="address">Adresse:</label>
+                <input type="text" id="address" name="address" th:field="*{address}" required/>
+            </div>
+            <div class="form-group">
+                <label for="qualifications">Qualifikationen:</label>
+                <textarea id="qualifications" name="qualifications" rows="3" cols="30" th:field="*{qualifications}" required></textarea>
+            </div>
+            <div class="form-group">
+    <label for="salary">Gehalt:</label>
+    <input type="number" id="salary" name="salary" th:field="*{salary}" min="0" step="0.01" required/>
+</div>
+            <div class="form-group">
+                <label for="username">Benutzername:</label>
+                <input type="text" id="username" name="username" th:field="*{username}" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="password" th:field="*{password}" required />
+            </div>
+            <div class="form-actions">
+                <input type="submit" value="Speichern" />
+                <a class="zu" th:href="@{/employees}">zurück</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

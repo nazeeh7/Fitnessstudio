@@ -1,0 +1,209 @@
+/* Allgemeine Formatierung */
+
+body {
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	
+	font-weight: bold;
+}
+
+h1 {
+	text-align: center;
+}
+/* Tabelle */
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+th {
+	background-color: #333;
+	color: white;
+}
+
+/* Formular */
+.login1 {
+		width: max-content;
+	margin: 107px 40%;
+	padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+.logout {
+	background: red;
+	color: black;
+    padding: 10px 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+.logout:hover {
+	background: rgb(236, 19, 52);
+}
+form {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid ⁠ccc;
+    border-radius: 5px;
+}
+
+label {
+	display: inline-block;
+}
+
+input[type=text],
+select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
+
+input[type=submit] {
+	background-color: #2196f3;
+	color: white;
+	padding: 15px 30px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-left: 136px
+}
+
+input[type=submit]:hover {
+	background-color: #1787e0;
+}
+
+
+/* Delete-Button */
+.delete {
+	color: white;
+	text-decoration: none;
+	background-color: red;
+	padding: 11px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+
+}
+
+.delete:hover {
+	background-color: rgb(236, 19, 52);
+}
+
+
+.cancel {
+	color: white;
+	text-decoration: none;
+	background-color: #2196f3;
+	color: white;
+	padding: 15px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.cancel:hover {
+	background-color: #1787e0;
+}
+
+
+.addMember {
+	margin-left: 30px;
+	color: white;
+	text-decoration: none;
+	background-color: #2196f3;
+	color: white;
+	padding: 11px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.addMember:hover {
+	background-color: #1787e0;
+}
+a {
+	margin-left: 30px;
+	color: white;
+	text-decoration: none;
+	background-color: #2196f3;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+a:hover {
+	background-color: #1787e0;
+}
+.login {
+		margin-left: 30px;
+	color: white;
+	text-decoration: none;
+	background-color: #2196f3;
+	color: white;
+	padding: 11px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.login:hover {
+	background-color: #1787e0;
+}
+.edit {
+	margin-left: 30px;
+	color: white;
+	text-decoration: none;
+	background-color: #2196f3;
+	color: white;
+	padding: 11px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.edit:hover {
+	background-color: #1787e0;
+}
+.no {
+	text-decoration: none;
+	background-color: #2196f3;
+	color: white;
+	padding: 11px 24px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-left: 50%;
+	position: absolute;
+    right: 44%;
+}
+
+.no:hover {
+	background-color: #1787e0;
+}
+.birthdate {
+	padding: 10px;
+	border-radius: 4px;
+}

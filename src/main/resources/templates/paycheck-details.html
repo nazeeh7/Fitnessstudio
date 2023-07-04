@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Paycheck Details</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Gehaltsscheckdetails für <span th:text="${employee.name}"></span></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Gehalt</th>
+                <th>ÜberStunde</th>
+                <th>Boni</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="paycheck : ${paychecks}">
+                <td th:text="${paycheck.salary}"></td>
+                <td th:text="${paycheck.overtime}"></td>
+                <td th:text="${paycheck.bonuses}"></td>
+                <td>
+                    <form th:action="@{'/paychecks/delete/' + ${paycheck.id}}" method="post" style="display: inline;">
+                        <input type="submit" value="Löschen" onclick="return confirm('Sind Sie sicher, dass Sie diesen Gehaltsscheck löschen möchten?')">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="zu" href="/employees">Zurück</a>
+</body>
+</html>

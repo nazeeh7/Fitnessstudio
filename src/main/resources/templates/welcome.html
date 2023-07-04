@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Willkommensseite</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+</head>
+<body>
+    <h1>Willkommen!</h1>
+    <h2 style="    text-align: center;">Bitte wähle deine Anmeldeoption:</h2>
+  
+   <div style = "display: flex; flex-direction: column; align-items: center;">
+<a style ="padding: 15px 47px; margin: 0;" href="dashboard">Mitarbeiter-Dashboard</a>
+   <a style = "margin: 10px 0 10px 0; padding: 15px 50px" href="member-dashboard">Mitglieder-Dashboard</a>
+    <a style="padding: 15px 28px; margin: 0 0 10px 0;"  href="artikelListe">Verkaufsbereich-Dashboard</a>
+    <a style= "    margin: 0; padding: 15px 91px;" class="logout" href="/logout">Abmelden</a>
+</div>
+<p th:text="${hasNotifications}" style="color: red;text-align: center;"></p>
+</body>
+</html>

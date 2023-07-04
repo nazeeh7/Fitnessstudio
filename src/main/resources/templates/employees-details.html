@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mitarbeiterdetails</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+                <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+
+    <h1>Mitarbeiterdetails</h1>
+    <p><strong>Name:</strong> <span th:text="${employee.name}"></span></p>
+    <p><strong>Alter:</strong> <span th:text="${employee.day} + '.' + ${employee.month} + '.' + ${employee.year}"></span></p>
+    <p><strong>Geschlecht:</strong> <span th:text="${employee.gender}"></span></p>
+    <p><strong>Adresse:</strong> <span th:text="${employee.address}"></span></p>
+    <p><strong>Qualifikationen:</strong> <span th:text="${employee.getQualificationsAsString()}"></span></p>
+    <p><strong>Gehalt:</strong> <span th:text="${employee.salary}"></span><span class="symbol">&#8364;</span></p>
+    <p><strong>Nutzername:</strong> <span th:text="${employee.username}"></span></p>
+<p><strong>Passwort:</strong> <span th:text="${employee.password}"></span></p>
+<a class="zu" th:href="@{/employeeView/{username}(username=${#authentication.name})}">Zurück</a>
+
+</body>
+</html>

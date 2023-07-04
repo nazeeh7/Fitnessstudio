@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Details zum Trainingsplan</title>
+    <link rel="stylesheet" href="/resources/css/style.css">
+            <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+
+<div th:if="${trainingPlan == null}">
+        <h1>Keine Trainingsplandetails vorhanden</h1>
+        <a class="zu" href="/ansicht_member_dashboard">Zurück</a><br/>
+    </div>
+    
+     <div th:if="${trainingPlan != null}">
+    <h1>Training Plan Details</h1>
+
+    <h1>Details zum Trainingsplan</h1>
+
+    <div th:if="${trainingPlan.member != null}">
+    <h2>Mitglied: <span th:text="${trainingPlan.member.firstName + ' ' + trainingPlan.member.lastName}"></span></h2>
+</div>
+    <h3>Wöchentlicher Trainingsplan</h3>
+<table>
+        <tr>
+            <th>Tag</th>
+            <th>Übung</th>
+            <th>Beschreibung</th>
+            <th>Dauer (Minuten)</th>
+        </tr>
+        <tr th:each="exercise : ${trainingPlan.exercises}">
+            <td th:text="${exercise.dayOfWeek}"></td>
+            <td th:text="${exercise.name}"></td>
+            <td th:text="${exercise.description}"></td>
+            <td th:text="${exercise.durationInMinutes}"></td>
+        </tr>
+    </table>
+<a class="zu" href="/ansicht_member_dashboard">Zurück</a><br/>
+</div>
+</body>
+</html>

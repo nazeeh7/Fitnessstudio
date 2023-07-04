@@ -1,0 +1,50 @@
+= Cross-Testing Feedback
+
+Durchführende Gruppe: (1)
+Anwendung von Gruppe: (2)
+
+== Getestetes System
+Die Anwendung ist eine medizinische Management-Plattform, die Patienten-, Personal- und Terminverwaltung sowie Rezept- und Leistungsabwicklung ermöglicht.
+
+== Fehler-Report
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+
+|http://localhost:8091 |Login |Anmeldeprobleme über den Port |Anmeldeseite mit Fehlermeldung
+|Katalogverwaltung |Leistung hinzufügen |Falscher Seitentitel "Leistung bearbeiten" anstatt "Leistung erstellen" |Verwirrung beim Benutzer
+|Katalogleistung |Symbol-Aktionen |Unklarheit zwischen Bearbeiten- und Löschen-Symbolen |Verwirrung beim Benutzer
+|Katalogleistung |Stück-Feld |Das Feld "Stück" kann leer sein |Erlaubt potenziell ungültige Eingaben
+|Katalogleistung |Preis |Preis als Ganzzahl wird als Dezimalzahl angezeigt |Falsche Darstellung
+|Katalogleistung |Leistungsname |Leistungsname kann Leerzeichen enthalten |Potenzielles Problem bei der Suche oder Identifikation
+|Katalogleistung |Sprachliche Fehler |EN-DE Sprachinkonsistenz bei Meldungen und Symbolnamen |Verwirrung beim Benutzer
+|Katalogleistung |Leistungsabbruch |Fehler beim Klick auf "Leistungsabbruch" |Seite nicht gefunden
+|Rezeptverwaltung |Symbol-Aktionen |Unklarheit zwischen Bearbeiten- und Löschen-Symbolen |Verwirrung beim Benutzer
+|Rezeptverwaltung |Neues Rezept |Fehlende Zurück-Taste |Eingeschränkte Navigation
+|Rezeptverwaltung |Abrechnung |Abgeschlossene Leistung wurde nicht abgerechnet |Abrechnungsfehler
+|Rezeptdetails-Ansicht |Zurück-Taste |Fehlende Zurück-Taste |Eingeschränkte Navigation
+|Rezeptdetails-Ansicht |Rezept Abbrechen |Das Rezept wird gelöscht anstatt abgebrochen |Fehlende Funktion
+|Rezeptdetails-Ansicht |Bearbeiten eines Rezepts |Zulassungsnummer und Diagnosenummer werden nicht überprüft |Ungültige Eingaben möglich
+|Rezeptverwaltung |Neues Rezept hinzufügen |Keine Bestätigungsnachricht nach dem Hinzufügen |Verwirrung beim Benutzer
+|Patientenverwaltung |Krankenkasse aktualisieren |Änderungen werden nicht angezeigt |Fehlerhafte Darstellung
+|Verschiedene Abteilungen |Symbol-Aktionen |Die Symbole sind unterschiedlich zwischen den Abteilungen, und die Symbole in der Rezepterfassung haben keine Beschreibung |Verwirrung beim Benutzer
+|Patientenverwaltung |Geburtsdatum |Akzeptiert ungültige Geburtsdaten |Fehlerseite
+|Patientenverwaltung |Vor- und Nachname |Nicht überprüft, ob sie nur Buchstaben enthalten |Ungültige Eingaben möglich
+|Personalverwaltung |Eingabe |Eingabe wird nicht überprüft |Fehlerhafte Eingabe wird akzeptiert
+|Terminplanung |Jahr |Jahr ist auf 2023 festgelegt |Eingeschränkte Nutzbarkeit
+|Terminplanung |Termine anzeigen |Nur der erste gebuchte Termin wird angezeigt |Fehlende Anzeige der restlichen Termine
+|===
+
+== Sonstiges
+
+Optik der Anwendung könnte verbessert werden, vor allem die Klarheit und Konsistenz der Symbole.
+Es gibt einige fehlende Features, wie zum Beispiel eine "Zurück"-Taste in den Rezeptansichten und die Möglichkeit, mehrere Termine gleichzeitig anzeigen zu lassen.
+Usability-Probleme aufgrund unklarer Symbole und fehlender Navigationselemente.
+
+== Verbesserungsvorschläge
+
+Symbole klarer und konsistenter gestalten, inklusive einheitlicher Benennung und leicht verständlicher Funktionen.
+Implementierung einer "Zurück"-Taste in allen Ansichten.
+Implementierung einer Funktion, um mehrere gebuchte Termine gleichzeitig anzeigen zu lassen.
+Eingabeüberprüfungen in allen Formularen durchführen, um falsche oder ungültige Eingaben zu vermeiden.
+Verbesserung der Sprachkonsistenz für eine bessere Benutzererfahrung.

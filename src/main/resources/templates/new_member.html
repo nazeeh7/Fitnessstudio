@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Neues Mitglied hinzufügen</title>
+	<link rel="stylesheet" th:href="@{/resources/css/style.css}">
+	<style>
+	.error-message {
+    color: red;
+        background-color: bisque;
+    padding: 20px;
+    position: absolute;
+    left: 39%;
+    top: 68px;
+    border-radius: 20px
+}
+	</style>
+</head>
+<body>
+	<h1>Neues Mitglied hinzufügen</h1>
+	<!-- Platzieren Sie dies irgendwo in Ihrem Formular, wo Sie die Fehlermeldung anzeigen möchten -->
+<span th:if="${error}" th:text="${error}" class="error-message"></span>
+	
+	<form th:action="@{/saveMember}" th:object="${member}" method="post">
+        <!-- Weitere Felder hinzufügen -->
+		<label for="firstName">Vorname:</label>
+		<input type="text" id="firstName" th:field="*{firstName}" required/>
+		<label for="lastName">Nachname:</label>
+	<input type="text" id="lastName" th:field="*{lastName}" required/>
+
+    <label for="address">Adresse:</label>
+	<input type="text" id="address" th:field="*{address}" required/>
+
+    <label for="birthdate">Geburtsdatum:</label>
+	<input class="birthdate" type="date" id="birthdate" th:field="*{birthdate}" required/>
+	<br>
+        <label for="gender">Geschlecht:</label>
+		<select id="gender" th:field="*{gender}" required>
+			<option value="M">Männlich</option>
+			<option value="F">Weiblich</option>
+		</select>
+		 <label for="phone">Telefon:</label>
+    <br>
+	<input style="width:100%; height: 30px; margin:0 0 10px"  type="number" id="phone" th:field="*{phone}" required/>
+
+	<label for="email">E-Mail:</label>
+	<br>
+	<input style="width:100%; height: 30px; margin:0 0 10px"  type="email" id="email" th:field="*{email}" required/>
+	<br>
+    <label for="username">Benutzername:</label>
+    <input type="text" id="username" th:field="*{username}" required />
+
+    <label for="password">Passwort:</label>
+    <br>
+    <input style="width:100%; height: 30px; margin:0 0 10px" type="password" id="password" th:field="*{password}" required />
+	<br>
+	<input type="submit" value="Speichern" />
+	<a class="cancel" th:href="members">Abbrechen</a>
+
+</form>
+</body>
+</html>

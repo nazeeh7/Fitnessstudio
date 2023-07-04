@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title>Persönliche Informationen</title>
+            <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Persönliche Informationen</h1>
+ <div >
+    <p><strong>Vorname:</strong>  <span th:text="${member.firstName}"></span></p>
+    <p><strong>Nachname:</strong>  <span th:text="${member.lastName}"></span></p>
+    <p><strong>Adresse:</strong>  <span th:text="${member.address}"></span></p>
+    <p><strong>Geburtsdatum:</strong>  <span th:text="${member.birthdate}"></span></p>
+    <p><strong>Geschlecht:</strong>  <span th:text="${member.gender}"></span></p>
+    <p><strong>Telefon:</strong>  <span th:text="${member.phone}"></span></p>
+    <p><strong>E-Mail:</strong>  <span th:text="${member.email}"></span></p>
+<a th:if="${contractId != null}" th:href="@{/ansicht_view_contract/{id}(id=${contractId})}">Vertrag anzeigen</a>
+<a th:if="${contractId == null}" th:href="@{/ansicht_view_contract}">Vertrag anzeigen</a>
+
+    <a class="zu" href="/ansicht_member_dashboard">Zurück</a><br/>
+</div>
+</body>
+</html>

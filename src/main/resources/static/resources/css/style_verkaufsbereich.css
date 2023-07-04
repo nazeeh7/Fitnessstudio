@@ -1,0 +1,165 @@
+:root {
+    --main-color: #2196f3;
+    --main-color-alt: #1787e0;
+    --main-transition: 0.3s;
+    --main-padding-top: 100px;
+    --main-padding-bottom: 100px;
+    --section-background: #ececec;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+nav {
+	height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: black;
+    padding:15px;
+    text-decoration: none;
+}
+nav ul li a:hover {
+    background: var(--main-color-alt)
+}
+
+nav .login {
+	background: var(--main-color);
+	color: black;
+    padding: 10px 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+nav .login:hover {
+    background: var(--main-color-alt)
+}
+.logout {
+	background: red;
+	color: black;
+    padding: 10px 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+.logout:hover {
+	background: rgb(236, 19, 52);
+}
+h1 {
+	font-size: 3em;
+	margin-bottom: 20px;
+}
+header nav ul li a {
+	border: none;
+	color: black;
+	cursor: pointer;
+	display: inline-block;
+	margin: 20px;
+	padding: 10px 20px;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+	background: none;
+}
+a {
+	border: none;
+	color: black;
+	cursor: pointer;
+	display: inline-block;
+	margin: 20px;
+	padding: 10px 20px;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+background: #2196f3;
+}
+
+a:hover {
+	 background: var(--main-color-alt)
+}
+	
+footer {
+	background-color: #eee;
+	padding: 10px;
+	text-align: center;
+}
+.catalog {
+	grid-template-columns: repeat(auto-fill, minmax(561px, 1fr));
+	display: grid;
+	gap: 40px;
+	text-align: center;
+}
+.catalog-item {
+	width: 550px;
+	height: 550px;
+	margin: 5px;
+    position: relative;
+}
+img {
+	width : 300px;
+	height: 300px;
+}
+.klick {
+    margin: 0;
+    bottom: 0px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    left: 62px;
+}
+.klick1 {
+    bottom: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 40%;
+}
+.neu_artikel {
+	display: inline-grid;
+    padding: 20px;
+}
+label {
+	    margin: 10px;
+}
+.input {
+	    padding: 5px 40px;
+
+}
+.save {
+	margin-top: 20px;
+	background: #2196f3;
+	padding: 13px;
+ 	cursor: pointer;
+}
+.save:hover {
+	background: #1787e0;
+}
+.text {
+	    left: 28%;
+    	position: absolute;
+    	bottom: 90px;
+}
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+    }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Neuen Dienstplan erstellen</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+    <style>
+        /* Füge hier deine individuellen CSS-Anpassungen hinzu */
+    </style>
+</head>
+<body>
+<h1>Neuen Dienstplan erstellen</h1>
+<form th:action="@{/schedules/create}" th:object="${schedule}" method="post">
+    <table>
+        <tr>
+            <th><label for="name">Mitarbeiter:</label></th>
+            <td>
+                <select id="name" name="employeeName" required>
+                    <option th:each="employee : ${employees}" th:value="${employee.name}" th:text="${employee.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="role">Rolle:</label></th>
+            <td>
+                <select id="role" name="role" th:field="*{role}" required>
+                    <option value="Reinigungskraft">Reinigungskraft</option>
+                    <option value="Tresenkraft">Tresenkraft</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table id="scheduleTable">
+        <tr>
+            <th>Tag</th>
+            <th>Startzeit</th>
+            <th>Endzeit</th>
+        </tr>
+        <tbody id="scheduleDays">
+            <tr class="daySchedule" th:each="day, status : ${days}">
+                <input type="hidden" name="dayCounter" th:value="${status.index}">
+                <td><input type="text" id="day" name="day" th:value="${day}" readonly required></td>
+                <td><input type="time" id="startTime" name="startTime" required></td>
+                <td><input type="time" id="endTime" name="endTime" required></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+   
+    <br>
+    <input type="submit" value="Dienstplan erstellen">
+    <br>
+    <a class="cancel" th:href="@{/schedules}">Zurück</a>
+</form>
+<script>
+    function addDaySchedule() {
+        const scheduleTable = document.getElementById("scheduleTable");
+        const daySchedule = scheduleTable.querySelector(".daySchedule").cloneNode(true);
+        scheduleTable.querySelector("tbody").appendChild(daySchedule);
+    }
+</script>
+</body>
+</html>

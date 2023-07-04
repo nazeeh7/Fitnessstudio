@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+    <title>Startseite</title>
+    	<link rel="stylesheet" th:href="@{/resources/css/style_index.css}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+                          <li th:if="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_EMPLOYEE'')')}">
+    <a href="/kundenArtikelliste">Verkaufsbereich</a>
+</li>
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+        </ul>
+<div th:if="${#authorization.expression('isAuthenticated() and (hasRole(''USER'') or hasRole(''EMPLOYEE'') or hasRole(''TRAINER''))')}">
+    <a class="logout" href="/logout">Abmelden</a>
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated() or (!hasRole(''USER'') and !hasRole(''EMPLOYEE'') and !hasRole(''TRAINER''))')}">
+    <a class="login" href="/login">Anmelden</a>
+</div>
+
+    </nav>
+   <div class="gallery" id="gallery">
+        <h2 class="main-title">Galerie</h2>
+        <div class="container">
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_1.png" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_2.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px" src="images/bild_3.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_4.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_5.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_6.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_7.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_8.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_9.jpg" alt="">
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <img style="height:255px"  src="images/bild_10.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

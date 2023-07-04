@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+
+    <title>Add Paycheck</title>
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+
+    <title>Gehaltsscheck hinzufügen</title>
+
+</head>
+<body>
+    <h1>Gehaltsscheck hinzufügen</h1>
+    <form th:action="@{'/employees/' + ${employee.name} + '/add-paycheck'}" method="post">
+        <label for="salary">Gehalt:</label>
+        <input type="number" id="salary" name="salary" required><br>
+        <label for="overtime">ÜberStunden:</label>
+        <input type="number" id="overtime" name="overtime" required><br>
+        <label for="bonuses">Bonuses:</label>
+        <input type="number" id="bonuses" name="bonuses" required><br>
+        
+       <input type="submit" value="Gehaltsscheck hinzufügen">
+    
+            <a class="zu" href="/employees">Zurück</a>
+
+ 
+
+    </form>
+</body>
+</html>

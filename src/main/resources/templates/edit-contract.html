@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vertrag bearbeiten</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+</head>
+<body>
+    <h1>Vertrag bearbeiten</h1>
+    <!-- Das gleiche Formular wie in add-contract.html, jedoch mit einem versteckten Eingabefeld für die Vertrags-ID -->
+    <form th:action="@{/updateContract/{id}(id=${contract.id})}" th:object="${contract}" method="post">
+
+        <input type="hidden" th:field="*{id}" />
+        <!-- Füge die restlichen Formularfelder von add-contract.html hinzu -->
+        <label for="member">Mitglied:</label>
+        <select id="member" name="memberId">
+            <option th:each="member : ${members}" th:value="${member.id}"
+                th:text="${member.firstName} + ' ' + ${member.lastName}"></option>
+        </select>
+         <label for="packageType">Pakettyp:</label>
+    <select id="packageType" th:field="*{packageType}">
+        <option value="Basic">Basic</option>
+        <option value="Premium">Premium</option>
+        <option value="Deluxe">Deluxe</option>
+        <!-- Weitere Optionen für Pakettypen hinzufügen -->
+    </select>
+
+    <label for="paymentDetails">Zahlungsdetails:</label>
+    <select id="paymentDetails" th:field="*{paymentDetails}">
+        <option value="creditCard">Kreditkarte</option>
+        <option value="bankTransfer">Banküberweisung</option>
+        <option value="paypal">PayPal</option>
+        <option value="cash">Barzahlung</option>
+        <!-- Weitere Optionen für Zahlungsdetails hinzufügen -->
+    </select>
+    <label for="price">Preis:</label>
+    <br>
+    <input style="padding:10px" type="number" step="0.01" id="price" th:field="*{price}" />
+    <br>
+    <label for="startDate">Startdatum:</label>
+    <br>
+    <input style="padding:10px"  type="date" id="startDate" th:field="*{startDate}" />
+<br>
+    <label for="endDate">Enddatum:</label>
+     <br>
+    <input style="padding:10px" type="date" id="endDate" th:field="*{endDate}" />
+    <br>
+    <label for="status">Status:</label>
+    <select id="status" th:field="*{status}">
+        <option value="aktiv">Aktiv</option>
+        <option value="storniert">Storniert</option>
+    </select>
+
+
+    <input type="submit" value="Speichern" />
+    <a href="/contracts">Abbrechen</a>
+</form>
+</body>
+</html>

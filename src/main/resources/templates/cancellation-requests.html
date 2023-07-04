@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stornierungsanfragen</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Stornierungsanfragen</h1>
+    <table>
+        <tr>
+            <th>Vertrags-ID</th>
+            <th>Mitgliedsname</th>
+            <th>Stornierungsgrund</th>
+            <th>Aktionen</th>
+            <!-- Weitere Spalten hinzufügen, falls erforderlich -->
+        </tr>
+     	<tr th:each="contract : ${cancellationRequests}">
+    		<td th:text="${contract.id}"></td>
+    		<td th:if="${contract.member != null}" th:text="${contract.member.firstName + ' ' + contract.member.lastName}"></td>
+    		<td th:text="${contract.reason}"></td>
+    		<td>
+        		<a th:href="@{'/approveCancellation/' + ${contract.id}}">Akzeptieren</a>
+    		</td>
+    <!-- Weitere Spalten hinzufügen, falls erforderlich -->
+		</tr>
+		</table>
+<a class="zu" href="/contracts">Zurück zu Verträgen</a>
+</body>
+</html>

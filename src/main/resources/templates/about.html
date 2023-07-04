@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+    <title>Über uns</title>
+   	<link rel="stylesheet" th:href="@{/resources/css/style_index.css}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+               <li th:if="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_EMPLOYEE'')')}">
+    <a href="/kundenArtikelliste">Verkaufsbereich</a>
+</li>
+
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+        </ul>
+<div th:if="${#authorization.expression('isAuthenticated() and (hasRole(''USER'') or hasRole(''EMPLOYEE'') or hasRole(''TRAINER''))')}">
+
+    <a class="logout" href="/logout">Abmelden</a>
+
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated() or (!hasRole(''USER'') and !hasRole(''EMPLOYEE'') and !hasRole(''TRAINER''))')}">
+    <a class="login" href="/login">Anmelden</a>
+</div>
+    </nav>
+  <section class="about">
+    <h1 style="text-align:center">Über Uns</h1>
+    <p style="color: #666;">Wir sind mehr als nur ein Fitnessstudio - wir sind Ihre Community für gesundes Leben und nachhaltigen Lifestyle. Mit Leidenschaft und Erfahrung haben wir eine einzigartige Umgebung geschaffen, in der alle willkommen sind, unabhängig von Alter, Fitnessniveau oder Erfahrung.</p>
+    <p style="color: #666;">Unser Anspruch ist es, Ihnen die besten und innovativsten Fitness- und Wellnessdienstleistungen zu bieten. Dabei legen wir großen Wert auf die Qualität unserer Geräte, unseres Service und unserer Kurse. Wir arbeiten ständig daran, neue und spannende Angebote zu entwickeln, um Sie auf Ihrem Weg zu einem gesünderen und glücklicheren Leben zu unterstützen.</p>
+    <p style="color: #666;">Unser Team aus hochqualifizierten Trainern und Mitarbeitern ist stets zur Stelle, um Sie zu unterstützen, zu motivieren und Ihnen bei Ihrer Fitnessreise zu helfen. Egal, ob Sie ein erfahrener Athlet oder ein Anfänger sind, wir haben die Ressourcen und das Know-how, um Ihnen zu helfen, Ihre Ziele zu erreichen.</p>
+    <p style="color: #666;">Bei uns finden Sie eine breite Palette von Dienstleistungen, darunter Personal Training, Gruppenfitnesskurse, Wellnessbereiche, modernste Geräte und vieles mehr. Egal, ob Sie Gewicht verlieren, Muskeln aufbauen, Ihre Ausdauer verbessern oder einfach nur einen gesünderen Lebensstil führen möchten, wir haben das richtige Angebot für Sie.</p>
+    <p style="color: #666;">Kommen Sie zu uns und erleben Sie den Unterschied. Wir freuen uns darauf, Sie auf Ihrer Fitnessreise zu begleiten!</p>
+</section>
+<div class="testimonials" id="testimonials">
+        <div class="dots dots-up"></div>
+        <div class="dots dots-down"></div>
+        <h2 class="main-title">Team</h2>
+        <div class="container">
+                    <div class="box">
+                <img src="images/avatar-03.png" alt="">
+                <h3>Eyad Arbash</h3>
+                <span class="title">Geschäftsführer</span>
+                <div class="rate">
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                </div>
+                <p>Eyad Arbash ist unser engagierter Geschäftsführer mit einer starken Vision für unser Fitnessstudio. Mit seiner Leidenschaft für Fitness und gesunden Lebensstil treibt er kontinuierliche Verbesserungen und Innovationen voran, um unseren Mitgliedern den besten Service zu bieten.</p>
+            </div>
+            <div class="box">
+                <img src="images/avatar-04.png" alt="">
+                <h3>Nazeeh Almasri</h3>
+                <span class="title">Haupttrainer</span>
+                <div class="rate">
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>Als Haupttrainer ist Nazeeh Almasri der Herzschlag unseres Fitnessstudios. Seine Kenntnisse und Erfahrung sind unübertroffen, und er ist stets darauf bedacht, dass jedes Training sowohl sicher als auch effektiv ist. Er strebt ständig danach, unseren Mitgliedern dabei zu helfen, ihre Fitnessziele zu erreichen und zu übertreffen.</p>
+            </div>
+            <div class="box">
+                <img src="images/avatar-06.png" alt="">
+                <h3>Mohamad Rami Zien</h3>
+                <span class="title">Kundendienstmanager</span>
+                <div class="rate">
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="filled fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>Mohamad Rami Zien, unser Kundendienstmanager, ist das freundliche Gesicht, das Sie in unserem Fitnessstudio begrüßt. Er ist bestrebt, allen unseren Mitgliedern ein positives Erlebnis zu bieten und sicherzustellen, dass ihre Bedürfnisse und Anliegen immer schnell und effizient behandelt werden.</p>
+            </div>
+            </div>
+
+    </div>
+</body>
+</html>

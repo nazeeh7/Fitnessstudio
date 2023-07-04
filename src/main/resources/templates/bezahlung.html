@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bezahlung</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_verkaufsbereich.css}">
+</head>
+<body>
+    <header>
+  <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+	<li><a href="/warenkorb">Warenkorb</a></li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+        </ul>
+<div th:if="${#authorization.expression('isAuthenticated() and (hasRole(''USER'') or hasRole(''EMPLOYEE'') or hasRole(''TRAINER''))')}">
+    <a class="login" href="/logout">abmelden</a>
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated() or (!hasRole(''USER'') and !hasRole(''EMPLOYEE'') and !hasRole(''TRAINER''))')}">
+    <a class="login" href="/login">Anmelden</a>
+</div>
+
+    </nav>
+    </header>
+    <h1>Bezahlungsseite</h1>
+    <p>Vielen Dank für Ihren Kauf! Bitte füllen Sie das untenstehende Formular aus, um die Zahlung abzuschließen.</p>
+
+    <!-- Fehlermeldung -->
+    <p th:text="${errorMessage}" style="color: red;"></p>
+
+    <form style="text-align: center;" th:action="@{/bezahlung/abschliessen}" method="post">
+        <label for="name">Name:</label><br>
+        <input class="input" type="text" id="name" name="name" value="" required><br>
+        <label for="cardNumber">Kreditkartennummer:</label><br>
+        <input class="input" type="text" id="cardNumber" name="cardNumber" value="" required><br>
+        <label for="expiryDate">Ablaufdatum:</label><br>
+        <input class="input" type="text" id="expiryDate" name="expiryDate" value="" required><br>
+        <label for="cvv">CVV:</label><br>
+        <input class="input" type="text" id="cvv" name="cvv" value="" required><br>
+        <input class="save" type="submit" value="Zahlung abschließen">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kündigungsantrag</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <style>
+    .antrag{
+    margin-left: 30px; color: white;
+    text-decoration: none; background-color: #2196f3; color: white; padding: 11px 20px; border: none; border-radius: 4px; cursor: pointer;
+    }
+     .antrag:hover{
+     background-color: #1787e0;
+     }
+
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+
+    </style>
+</head>
+
+<body>
+    <h1>Kündigungsantrag</h1>
+    
+     <p style="background-color: antiquewhite; padding: 20px; text-align: center;" th:if="${message}" th:text="${message}"></p>
+     
+    <form class="login1" method="post" th:action="@{/submitCancellation}">
+
+        <input type="hidden" th:name="id" th:value="${contract.id}" />
+        
+        <label for="reason">Kündigungsgrund:</label>
+        <br>
+        <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br/>
+ 
+                <br>
+        <button class="antrag" type="submit">Kündigungsantrag stellen</button>
+        <a class="zu" href="/member_personal_infos">Zurück zu Contracts</a>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Artikelliste</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_verkaufsbereich.css}">
+    <style>
+    .red{
+    background-color: red;
+    }
+    .red:hover{
+    background-color: rgb(236, 19, 52);
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/welcome">Startseite</a></li>
+                <li><a href="/verkaufsbereich/neu">Artikel hinfügen</a></li>
+                <li><a href="/verkaufsbereich/checkReorderList">Nachbestellungsliste</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1 style="text-align: center; margin: 50px ">Alle Artikel</h1>
+    <div class="catalog">
+		 <div th:each="artikel : ${artikel}" class="catalog-item">
+		    <img th:src="@{${artikel.bildUrl}}" alt="Bild">
+		    <h3 th:text="${artikel.name}"></h3>
+		    <p th:text="${artikel.beschreibung}"></p>
+		    <p th:text="${artikel.price}"></p>
+		    <div class="klick">
+		        <a th:href="@{'/verkaufsbereich/' + ${artikel.idAsString}}">Details</a>
+                <a th:href="@{'/verkaufsbereich/' + ${artikel.idAsString} + '/bearbeiten'}">Bearbeiten</a>
+                <a class="red" th:href="@{'/verkaufsbereich/' + ${artikel.idAsString} + '/loeschen'}">Löschen</a>
+                </div>
+		</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <title>Trainingspläne</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    .x{
+    padding: 11px 20px
+    }
+    </style>
+</head>
+<body>
+<h1>Trainingspläne</h1>
+<table>
+        <tr>
+             <th>ID</th>
+            <th>Mitglied</th>
+            <th>Aktionen</th>
+        </tr>
+        <tr th:each="trainingPlan : ${trainingPlans}">
+            <td>
+            <span th:text="${trainingPlan.id}"></span>
+            </td>
+            <td>
+                            <span th:if="${trainingPlan.member != null}">
+                            <span th:text="${trainingPlan.member.firstName}"></span>
+                <span th:text="${trainingPlan.member.lastName}"></span>
+            </span>
+            <span th:unless="${trainingPlan.member != null}">Nicht verfügbar</span> 
+        </td>
+        <td>
+            <a class="x" th:href="@{/training-plans/{id}(id=${trainingPlan.id})}">Ansehen</a>
+            <a class="x" th:href="@{/training-plans/{id}/edit(id=${trainingPlan.id})}">Bearbeiten</a>
+            <a class="delete" th:href="@{/training-plans/{id}/delete(id=${trainingPlan.id})}">Löschen</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/training-plans/new}">Neuen Trainingsplan hinzufügen</a>
+
+<!-- Verlinkung basierend auf Benutzerrolle -->
+<a class="zu" th:href="@{/employeeView/{name}(name=${employee.username})}" th:if="${isTrainer}">Zurück zum Mitarbeiter-Dashboard</a>
+
+<a class="zu" th:href="@{/member-dashboard}" th:if="${isAdmin}">Zurück zum Mitglieder-Dashboard</a>
+
+</body>
+</html>

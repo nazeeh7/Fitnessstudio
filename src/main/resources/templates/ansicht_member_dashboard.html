@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/resources/css/style_index.css}">
+    <title>Mitglieder Dashboard</title>
+     <style>
+        .notification-icon {
+             position: absolute;
+    top: 120px;
+    right: 258px;
+    font-size: 24px;
+    cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+       <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+            <li><a href="/kundenArtikelliste">Verkaufsbereich</a></li>
+        </ul>
+
+         <a class="logout" href="/logout">Abmelden</a>
+
+    </nav>
+       <h1 style="display: flex; flex-direction: column; align-items: center;">Mitglieder-Dashboard</h1>
+    <div style = "display: flex; flex-direction: column; align-items: center;">
+    <a class ="member" style="padding: 20px 40px; margin: 0;" href="/member_personal_infos">Persönliche Informationen</a><br/>
+    <br/>
+         <div th:if="${trainingPlan != null}">
+            <a class="member" style="margin: 0; padding: 20px 85px;" th:href="@{/trainingPlan/{id}(id=${trainingPlan.id})}">Trainingsplan</a><br/>
+        </div>
+        <br/>
+        <div th:if="${trainingPlan == null}">
+            <a class="member" style="margin: 0; padding: 20px 85px;" href="/trainingPlan">Trainingsplan</a><br/>
+        </div>
+<a class="notification-icon" th:if="${message != ''}" th:href="@{/cancellation-approval}">&#128276;</a>
+    </div>
+    <span style="    display: block;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    position: absolute;
+    border-radius: 50%;
+    right: 269px;
+    top: 14%;" th:if="${message != ''}"></span>
+</body>
+</html>

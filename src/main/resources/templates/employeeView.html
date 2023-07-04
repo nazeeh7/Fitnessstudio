@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mitarbeiteransicht</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+                          <li th:if="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_EMPLOYEE'')')}">
+    <a href="/kundenArtikelliste">Verkaufsbereich</a>
+</li>
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+
+        </ul>
+
+        <a class="logout" href="/logout">Abmelden</a>
+
+    </nav>
+    <h1>Willkommen, <span th:text="${employee != null ? username : ''}"></span>!</h1>
+
+
+    <div class="employee">
+        <!-- Persönliche Informationen -->
+        <a th:href="@{/employeeView/{name}/personal-information(name=${employee.name})}">Persönliche Informationen</a>
+
+        <!-- Urlaubsantrag stellen -->
+        <a th:href="@{/employeeView/{name}/request-holiday(name=${employee.name})}">Urlaubsantrag stellen</a>
+
+    
+    <!-- Dienstplan -->
+    <a th:href="@{/employeeView/{name}/schedule(name=${employee.name})}">Dienstplan anzeigen</a>
+    
+ <a th:href="@{/training-plans/list-training-plans}"
+   th:if="${isTrainer}">Training Plans</a>
+
+    </div>
+    <div></div>
+</body>
+</html>

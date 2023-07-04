@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mitglied bearbeiten</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+</head>
+<body>
+    <h1>Mitglied bearbeiten</h1>
+    <form th:action="@{/updateMember}" th:object="${member}" method="post">
+        <input type="hidden" th:field="*{id}">
+            <label for="firstName">Vorname:</label>
+    <input type="text" id="firstName" th:field="*{firstName}" required>
+    
+    <label for="lastName">Nachname:</label>
+    <input type="text" id="lastName" th:field="*{lastName}" required>
+    
+    <label for="address">Adresse:</label>
+    <input type="text" id="address" th:field="*{address}" required>
+    
+    <label for="birthdate">Geburtsdatum:</label>
+    <input class="birthdate" type="date" id="birthdate" th:field="*{birthdate}" required>
+    <br>
+    <label for="gender">Geschlecht:</label>
+    <select id="gender" th:field="*{gender}" required>
+        <option value="Männlich">Männlich</option>
+        <option value="Weiblich">Weiblich</option>
+    </select>
+     <label for="phone">Telefon:</label>
+    <br>
+	<input style="width:100%; height: 30px; margin:0 0 10px"  type="number" id="phone" th:field="*{phone}" required/>
+
+	<label for="email">E-Mail:</label>
+	<br>
+	<input style="width:100%; height: 30px; margin:0 0 10px"  type="email" id="email" th:field="*{email}" required/>
+	<br>
+
+    <input type="submit" value="Aktualisieren">
+    <a class="cancel" th:href="@{/members}">Abbrechen</a>
+</form>
+        </body>
+</html>

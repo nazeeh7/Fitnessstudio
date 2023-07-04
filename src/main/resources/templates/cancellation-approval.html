@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title>Stornierungsgenehmigung</title>
+</head>
+<body>
+    <h1>Stornierungsgenehmigung</h1>
+
+       <p><strong>Genehmigung des Kündigungsantrags: </strong> <span th:text="${cancellationRequest.approval}"></span></p>
+ <p><strong>Kündigungsfrist:</strong> <span th:text="${cancellationRequest.noticePeriod}"></span> Tage</p>
+<p>Sie haben noch einen Monat zu zahlen, da die Kündigungsfrist 30 Tage beträgt. Der zu zahlende Betrag beträgt den Betrag, der in Ihrer letzte Rechnung festgelegt ist.</p>
+<a href="/ansicht_member_dashboard">Zurück</a><br/>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bezahlung bestätigt</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_verkaufsbereich.css}">
+</head>
+<body>
+    <header>
+ <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+	<li><a href="/warenkorb">Warenkorb</a></li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+        </ul>
+<div th:if="${#authorization.expression('isAuthenticated() and (hasRole(''USER'') or hasRole(''EMPLOYEE'') or hasRole(''TRAINER''))')}">
+    <a class="login" href="/logout">abmelden</a>
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated() or (!hasRole(''USER'') and !hasRole(''EMPLOYEE'') and !hasRole(''TRAINER''))')}">
+    <a class="login" href="/login">Anmelden</a>
+</div>
+
+    </nav>
+    </header>
+    <h1>Vielen Dank für Ihren Kauf!</h1>
+    <p>Ihre Bezahlung wurde erfolgreich verarbeitet und Ihre Bestellung wird bald versandt. Ein Bestätigung wurde an Ihre E-Mail-Adresse gesendet.</p>
+    <a href="/kundenArtikelliste">Zurück zur Artikelliste</a>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Urlaubsantragsstatus</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+</head>
+<body>
+    <h1>Urlaubsantragsstatus für <span th:text="${employee.name}"></span></h1>
+    <h2>Genehmigte Urlaubsanträge</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Startdatum</th>
+                <th>Dauer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="request : ${approvedRequests}">
+                <td th:text="${request.startDate}"></td>
+                <td th:text="${request.duration}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Abgelehnte Urlaubsanträge</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Startdatum</th>
+                <th>Dauer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="request : ${rejectedRequests}">
+                <td th:text="${request.startDate}"></td>
+                <td th:text="${request.duration}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/employeeView/{name}/holiday-requests(name=${employee.name})">Zurück zu Urlaubsanträge</a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Artikeldetails</title>
+	<link rel="stylesheet" th:href="@{/resources/css/style_verkaufsbereich.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/welcome">Startseite</a></li>
+                <li><a href="/verkaufsbereich/neu">Artikel hinfügen</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Liste des Artikels, die nachbestellt werden müssen</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Preis</th>
+                <th>Aktuelle Menge</th>
+                <th>Nachbestellschwelle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="artikel : ${reorderNeeded}">
+                <td th:text="${artikel.name}">Name</td>
+                <td th:text="${artikel.price}">Preis</td>
+                <td th:text="${artikel.quantity}">Aktuelle Menge</td>
+                <td th:text="${artikel.reorderThreshold}">Nachbestellschwelle</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/artikelListe">Zurück zur Artikelliste</a>
+</body>
+</html>

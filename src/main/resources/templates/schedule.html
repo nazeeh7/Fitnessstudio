@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+    <title>Mitarbeiter-Dienstplan</title>
+    <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Dienstplan für Mitarbeiter <span th:text="${employee.name}"></span></h1>
+    <table>
+        <tr>
+            <th>Arbeitsstunden</th>
+            <th>Rolle</th>
+        </tr>
+        <tr th:each="schedule : ${schedules}">
+            <td>
+                <table>
+                    <tr th:each="workingHour : ${#strings.arraySplit(schedule.workingHours, ';')}">
+                        <td th:text="${workingHour}"></td>
+                    </tr>
+                </table>
+            </td>
+            <td th:text="${schedule.role}"></td>
+        </tr>
+    </table>
+    <a class="zu" th:href="@{/employeeView/{username}(username=${#authentication.name})}">Zurück</a>
+</body>
+</html>

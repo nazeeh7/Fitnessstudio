@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainingsplan bearbeiten</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Trainingsplan bearbeiten</h1>
+    <form th:action="@{/training-plans/{id}/edit(id=${trainingPlan.id})}" th:object="${trainingPlan}" method="post">
+     <h2>Wöchentlicher Trainingsplan</h2>
+    <table>
+        <tr>
+            <th>Tag</th>
+            <th>Übung</th>
+            <th>Beschreibung</th>
+            <th>Dauer (Minuten)</th>
+        </tr>
+        <tr th:each="exercise, exerciseStatus : ${exercises}">
+            <td th:text="${exercise.dayOfWeek}"></td>
+            <td>
+                <select th:name="'exerciseName'" required>
+                    <option value="">--Übung auswählen--</option>
+                    <option th:each="exerciseName : ${exerciseNames}"
+                            th:value="${exerciseName}"
+                            th:selected="${exerciseName == exercise.name}"
+                            th:text="${exerciseName}"></option>
+                </select>
+            </td>
+            <td>
+                <input type="text" th:name="'exercises[' + ${exerciseStatus.index} + '].description'" th:value="${exercise.description}" placeholder="Beschreibung der Übung" >
+            </td>
+            <td>
+                <input type="number" th:name="'exercises[' + ${exerciseStatus.index} + '].durationInMinutes'" th:value="${exercise.durationInMinutes}" placeholder="Dauer (Minuten)" min="1" required>
+            </td>
+            <td>
+                <input type="hidden" th:name="'exercises[' + ${exerciseStatus.index} + '].id'" th:value="${exercise.id}">
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" th:field="*{member.id}">
+    <input type="hidden" th:name="_method" th:value="PUT">
+    <input type="submit" value="Speichern"/>
+    <a class="zu" th:href="@{/training-plans/list-training-plans}">Zurück zu den Trainingsplänen</a>
+</form>
+</body>
+</html>

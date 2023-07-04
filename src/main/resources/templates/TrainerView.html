@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mitarbeiteransicht</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+                          <li th:if="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_EMPLOYEE'')')}">
+    <a href="/kundenArtikelliste">Verkaufsbereich</a>
+</li>
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+        </ul>
+<div th:if="${#authorization.expression('isAuthenticated() and (hasRole(''USER'') or hasRole(''EMPLOYEE'') or hasRole(''TRAINER''))')}">
+    <a class="login" href="/logout">abmelden</a>
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated() or (!hasRole(''USER'') and !hasRole(''EMPLOYEE'') and !hasRole(''TRAINER''))')}">
+    <a class="login" href="/login">Anmelden</a>
+</div>
+
+    </nav>
+    <h1>Willkommen, <span th:text="${trainer != null ? trainer.name : ''}"></span>!</h1>
+
+    <div class="employee">
+        <!-- Persönliche Informationen -->
+        <a th:href="@{/employeeView/{name}/personal-information(name=${trainer.name})}">Persönliche Informationen</a>
+
+        <!-- Urlaubsantrag stellen -->
+        <a th:href="@{/employeeView/{name}/request-holiday(name=${trainer.name})}">Urlaubsantrag stellen</a>
+
+        <!-- Dienstplan -->
+        <a th:href="@{/employeeView/{name}/schedule(name=${trainer.name})}">Dienstplan anzeigen</a>
+
+        <a style="margin: 10px 0 10px 0; padding: 15px 50px" th:href="@{/training-plans/trainer-list-training-plans}">Training Plans</a>
+    </div>
+</body>
+</html>

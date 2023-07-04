@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+    <title>Employee Details</title>
+    <style>
+        .symbol {
+            display: inline-block;
+            margin-left: 5px;
+        }
+            .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mitarbeiterdetails</h1>
+
+    <p><strong>Name:</strong> <span th:text="${employee.name}"></span></p>
+    <p><strong>Alter:</strong> <span th:text="${employee.day} + '.' + ${employee.month} + '.' + ${employee.year}"></span></p>
+    <p><strong>Geschlecht:</strong> <span th:text="${employee.gender}"></span></p>
+    <p><strong>Adresse:</strong> <span th:text="${employee.address}"></span></p>
+    <p><strong>Qualifikationen:</strong> <span th:text="${employee.getQualificationsAsString()}"></span></p>
+    <p><strong>Gehalt:</strong> <span th:text="${employee.salary}"></span><span class="symbol">&#8364;</span></p>
+
+    <!-- Add the following lines to display the username and password -->
+    <p><strong>Benutzername:</strong> <span th:text="${employee.username}"></span></p>
+    <p><strong>Password:</strong> <span th:text="${employee.password}"></span></p>
+
+    <h2>Neuer Gehaltsscheck</h2>
+    <p><strong>Gehalt:</strong> <span th:text="${paycheck.salary}"></span><span class="symbol">&#8364;</span></p>
+    <p><strong>ÜberStunde:</strong> <span th:text="${paycheck.overtime}"></span><span class="symbol">&#72;</span></p>
+    <p><strong>Bonuses:</strong> <span th:text="${paycheck.bonuses}"></span></p>
+
+    <a th:href="@{'/employees/' + ${employee.name} + '/download'}">Details als PDF herunterladen</a>
+
+
+    <a class="zu" href="/employees">Zurück</a>
+</body>
+
+</html>

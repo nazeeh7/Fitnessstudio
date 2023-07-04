@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Löschen bestätigen</title>
+	<link rel="stylesheet" th:href="@{/resources/css/style.css}">
+</head>
+<body>
+	<h1>Löschen bestätigen</h1>
+	<p style="text-align: center;">Möchten Sie das Mitglied <strong
+			th:text="${member.firstName} + ' ' + ${member.lastName}"></strong> wirklich löschen?</p>
+			<form style="margin-left: 40%; width: 350px; background-color: darkgray;" th:action="@{/delete_member/{id}(id=${member.id})}" method="post">
+	<input style="margin-left: 15px;" type="submit" value="Ja" />
+	<a class="no" th:href="@{/members}">Nein</a>
+</form>
+</body>
+</html>

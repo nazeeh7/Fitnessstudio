@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Genehmigte Urlaubsanträge</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+                <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+	
+    <h1>Genehmigte Urlaubsanträge</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Mitarbeiter</th>
+                <th>Startdatum</th>
+                <th>Dauer</th>
+                <th>Status</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+    <tr th:each="request : ${approvedRequests}" th:if="${request.employee.username == #authentication.name}">
+        <!-- Anzeigen der Urlaubsantragsdetails für den Mitarbeiter -->
+        <td th:text="${request.employee.name}"></td>
+        <td th:text="${request.startDate}"></td>
+        <td th:text="${request.duration}"></td>
+        <td th:text="${request.status}"></td>
+        <td>
+                    
+</form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<a class="zu" th:href="@{/employeeView/{username}(username=${#authentication.name})}">Zurück</a>
+</body>
+</html>

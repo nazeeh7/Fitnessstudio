@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title>Mitgliederverwaltung</title>
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Mitgliederliste</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Adresse</th>
+                <th>Geburtsdatum</th>
+                <th>Geschlecht</th>
+                <th>Telefon</th>
+                <th>E-Mail</th>
+                <th>Benutzername</th> <!-- Hinzugefügt -->
+                <th>Passwort</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.firstName}"></td>
+                <td th:text="${member.lastName}"></td>
+                <td th:text="${member.address}"></td>
+                <td th:text="${member.birthdate}"></td>
+                <td th:text="${member.gender}"></td>
+                <td th:text="${member.phone}"></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.username}"></td> <!-- Hinzugefügt -->
+                <td th:text="${member.password}"></td>
+                <td>
+                    <a class="edit" th:href="@{/edit_member/{id}(id=${member.id})}" th:text="Bearbeiten">Bearbeiten</a>
+                    <a class="delete" th:href="@{/delete_member/{id}/confirm(id=${member.id})}" th:text="Löschen">Löschen</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="addMember" th:href="@{/newMemberForm}">Mitglied hinzufügen</a>
+    <a class="zu" href="/member-dashboard">Zurück zum Mitglied-Dashboard</a>
+</body>
+</html>

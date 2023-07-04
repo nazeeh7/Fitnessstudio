@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+    <title>Kontakt</title>
+    	<link rel="stylesheet" th:href="@{/resources/css/style_index.css}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+                           <li th:if="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_EMPLOYEE'')')}">
+    <a href="/kundenArtikelliste">Verkaufsbereich</a>
+</li>
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+        </ul>
+<div th:if="${#authorization.expression('isAuthenticated() and (hasRole(''USER'') or hasRole(''EMPLOYEE'') or hasRole(''TRAINER''))')}">
+
+    <a class="logout" href="/logout">Abmelden</a>
+
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated() or (!hasRole(''USER'') and !hasRole(''EMPLOYEE'') and !hasRole(''TRAINER''))')}">
+    <a class="login" href="/login">Anmelden</a>
+</div>
+    </nav>
+  <div class="contact" id="contact">
+        <div class="container">
+            <div class="main-heading">
+                <h2>Kontaktieren Sie uns</h2>
+                <p>Sie haben Fragen, Anregungen oder benötigen weitere Informationen? Zögern Sie nicht, uns zu kontaktieren! Wir freuen uns immer, von Ihnen zu hören und sind bereit, Ihnen bei allen Anliegen rund um unser Fitnessstudio zu helfen. Füllen Sie einfach das untenstehende Formular aus, und wir werden uns so schnell wie möglich bei Ihnen melden.</p>
+            </div>
+            <div class="content">
+                <form action="">
+                    <input class="main-input" type="text" name="name" placeholder="Ihr Name">
+                    <input class="main-input" type="email" name="mail" placeholder="Ihre E-Mail-Adresse">
+                    <textarea class="main-input" name="message" placeholder="Ihre Nachricht"></textarea>
+                    <input type="submit" value="Nachricht senden">
+                </form>
+                <div class="info">
+                    <h4>Kontaktinformationen</h4>
+                    <span class="phone">+49 123.456.789</span>
+                    <span class="phone">+49 123.456.789</span>
+                    <h4>Unsere Adresse</h4>
+                    <address>Tolle Adresse 17<br>06217 Merseburg<br>123-4567-890<br>Deutschland</address>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Neuer Trainingsplan</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Neuen Trainingsplan hinzufügen</h1>
+    <form th:action="@{/training-plans/save}" th:object="${trainingPlan}" method="post">
+        <!-- Dropdown-Liste der Mitglieder -->
+        <p>Mitglied:
+            <select th:field="*{member.id}" required>
+                <option value="">--Mitglied auswählen--</option>
+                <option th:each="member : ${members}"
+                        th:value="${member.id}"
+                        th:text="${member.firstName} + ' ' + ${member.lastName}"></option>
+            </select>
+        </p>
+        <h2>Wöchentlicher Trainingsplan</h2>
+    <table>
+        <tr>
+            <th>Tag</th>
+            <th>Übung</th>
+            <th>Beschreibung</th>
+            <th>Dauer (Minuten)</th>
+        </tr>
+        <tr th:each="dayOfWeek : ${T(java.time.DayOfWeek).values()}">
+            <td th:text="${dayOfWeek}"></td>
+            <td>
+                <select th:name="exerciseName" required>
+                    <option value="">--Übung auswählen--</option>
+                    <option th:each="exerciseName : ${exerciseNames}" th:value="${exerciseName}" th:text="${exerciseName}"></option>
+                </select>
+            </td>
+            <td>
+                <input type="text" th:name="'exercises[' + ${dayOfWeek.ordinal()} + '].description'" placeholder="Beschreibung der Übung" >
+            </td>
+            <td>
+                <input type="number" th:name="'exercises[' + ${dayOfWeek.ordinal()} + '].durationInMinutes'" placeholder="Dauer (Minuten)" min="1" required>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Speichern"/>
+    <a class="zu" th:href="@{/training-plans/list-training-plans}">Zurück zu den Trainingsplänen</a>
+</form>
+</body>
+</html>

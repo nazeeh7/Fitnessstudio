@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+	<meta charset="UTF-8">
+	<title>Artikel Formular</title>
+	<link rel="stylesheet" th:href="@{/resources/css/style_verkaufsbereich.css}">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/welcome">Startseite</a></li>
+				<li><a href="/artikelListe">Artikel Liste</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section style=" text-align: center">
+			<h2>Artikel bearbeiten</h2>
+				<form class="neu_artikel" th:action="@{'/verkaufsbereich/' + ${artikel.idAsString} + '/bearbeiten'}" th:object="${artikel}" method="post">
+					<input class="input" type="hidden" th:field="*{idAsString}">
+					<label for="name">Name:</label>
+					<input class="input" type="text" th:field="*{name}" id="name" required>
+					<label for="beschreibung">Beschreibung:</label>
+					<input class="input" type="text" th:field="*{beschreibung}" id="beschreibung" required>
+					<label for="price">Preis:</label>
+					<input class="input" type="number" th:field="*{price}" id="price" step="0.1" required>
+					<label for="bild-url">Bild URL:</label>
+					<input class="input" type="url"  id="bild-url">
+					<label for="quantity">Menge:</label>
+					<input class="input" type="number" th:field="*{quantity}" id="quantity" required>
+					<label for="reorderThreshold">Nachbestellschwelle:</label>
+					<input class="input" type="number" th:field="*{reorderThreshold}" id="reorderThreshold" value="" required>
+					
+					<button class="save" type="submit">Speichern</button>
+				</form>
+		</section>
+		<section>
+			<p style=" text-align: center"><a th:href="@{/artikelListe}">Zurück zur Artikel Liste</a></p>
+		</section>
+	</main>
+</body>
+</html>

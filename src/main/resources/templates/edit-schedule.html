@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dienstplan bearbeiten</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_employee.css}">
+    <style>
+        /* Füge hier deine individuellen CSS-Anpassungen hinzu */
+    </style>
+</head>
+<body>
+<h1>Dienstplan bearbeiten</h1>
+<form th:action="@{/schedules/update}" th:object="${updatedSchedule}" method="post">
+    <input type="hidden" name="id" th:value="${schedule.id}">
+    <input type="hidden" name="employee.id" th:value="${schedule.employee.id}">
+    <input type="hidden" name="employee.name" th:value="${schedule.employee.name}">
+    <input type="hidden" name="employee.role" th:value="${schedule.employee.role}">
+    <table>
+        <!-- Mitarbeiter und Rolle Abschnitte sind entfernt -->
+    </table>
+    <br>
+    <table id="scheduleTable">
+        <tr>
+            <th>Tag</th>
+            <th>Startzeit</th>
+            <th>Endzeit</th>
+        </tr>
+        <tbody id="scheduleDays">
+        <tr class="daySchedule" th:each="day, index : ${days}">
+            <td><input type="text" th:value="${day}" readonly required></td>
+            <td><input type="time" th:name="'startTimes'" th:value="${schedule.startTimes[__${index.index}__]}" required></td>
+            <td><input type="time" th:name="'endTimes'" th:value="${schedule.endTimes[__${index.index}__]}" required></td>
+            <input type="hidden" th:name="'days'" th:value="${day}">
+        </tr>
+        </tbody>
+    </table>
+    <br>
+ 
+    <br>
+    <input type="submit" value="Dienstplan aktualisieren">
+    <br>
+    <a class="cancel" th:href="@{/schedules}">Zurück</a>
+</form>
+<script>
+    function addDaySchedule() {
+        const scheduleTable = document.getElementById("scheduleTable");
+        const daySchedule = scheduleTable.querySelector(".daySchedule").cloneNode(true);
+
+        const index = scheduleTable.querySelectorAll(".daySchedule").length; // Aktuellen Index ermitteln
+
+        // Die Namen der Eingabefelder mit dem aktuellen Index aktualisieren
+        daySchedule.querySelector("input[name='startTimes[0]']").setAttribute("name", "startTimes[" + index + "]");
+        daySchedule.querySelector("input[name='endTimes[0]']").setAttribute("name", "endTimes[" + index + "]");
+
+        scheduleTable.querySelector("tbody").appendChild(daySchedule);
+    }
+</script>
+</body>
+</html>

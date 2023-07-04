@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Warenkorb</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style_verkaufsbereich.css}">
+</head>
+<body>
+    <header>
+        <nav>
+        <div class="logo">Fitnessstudio</div>
+        <ul>
+            <li><a href="/index">Startseite</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+             <li th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYEE'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+   <li th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+    <a th:href="@{/employeeView/{username}(username=${#authentication.name})}">Mitarbeiter-Dashboard</a>
+</li>
+    <!-- Das folgende li-Element wird nur angezeigt, wenn die Rolle des Benutzers "User" ist -->
+    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href="/ansicht_member_dashboard">Mitglied-Dashboard</a>
+    </li>
+        </ul>
+<div th:if="${#authorization.expression('isAuthenticated() and (hasRole(''USER'') or hasRole(''EMPLOYEE'') or hasRole(''TRAINER''))')}">
+    <a class="logout" href="/logout">Abmelden</a>
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated() or (!hasRole(''USER'') and !hasRole(''EMPLOYEE'') and !hasRole(''TRAINER''))')}">
+    <a class="login" href="/login">Anmelden</a>
+</div>
+
+    </nav>
+    </header>
+    <h1>Ihr Warenkorb</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Menge</th>
+                <th>Preis</th>
+                <!-- add other columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cartItem : ${cart}">
+                <td th:text="${cartItem.product.name}"></td>
+                <td style="text-align: center" th:text="${cartItem.quantity}"></td>
+                <td th:text="${cartItem.price}"></td>
+                <td style="padding: 10px; gap: 10px; display: flex;">
+                    <form th:action="@{'/warenkorb/verkaufsbereich/' + ${cartItem.product.idAsString} + '/entfernen'}" method="post">
+                        <button style=" margin-bottom: 10px; padding: 10px; background: #21d6f3;cursor: pointer;" type="submit">Entfernen</button>
+                    </form>
+					<form th:action="@{'/bezahlung/verkaufsbereich/' + ${cartItem.product.idAsString} + '/einzelArtikelkaufen'}" method="post">
+						<button style="padding: 10px 17px; background: #21d6f3;  cursor: pointer;" type="submit">Kaufen</button>
+					</form>
+                </td>
+                <!-- fill other columns as needed -->
+            </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/bezahlung/kaufen}" method="post">
+        <button style="padding: 10px; background: #21d6f3; cursor: pointer;margin-left: 20px;" type="submit">Gesamten Warenkorb kaufen</button>
+    </form>
+    <a href="/kundenArtikelliste">Zurück zur Artikelliste</a>
+</body>
+</html>

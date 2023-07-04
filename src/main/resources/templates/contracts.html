@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vorhandene Verträge</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Vorhandene Verträge</h1>
+    <a href="/cancellation-requests">Stornierungsanfragen</a>
+    <table style="margin-top: 20px;">
+    <tr>
+        <th>ID</th>
+        <th>Mitglied</th>
+        <th>Pakettyp</th>
+        <th>Zahlungsdetails</th>
+        <th>Preis</th>
+        <th>Startdatum</th>
+        <th>Enddatum</th>
+        <th>Status</th>
+        <!-- Füge bei Bedarf weitere Vertragsfelder hinzu -->
+        <th>Aktionen</th> <!-- Füge eine Überschrift für die Aktionen hinzu -->
+    </tr>
+    <tr th:each="contract : ${contracts}">
+        <td th:text="${contract.id}"></td>
+        <td th:if="${contract.member != null}" th:text="${contract.member.firstName + ' ' + contract.member.lastName}"></td>
+        <td th:text="${contract.packageType}"></td>
+        <td th:text="${contract.paymentDetails}"></td>
+        <td th:text="${contract.price}"> € </td>
+        <td th:text="${contract.startDate}"></td>
+        <td th:text="${contract.endDate}"></td>
+        <td th:text="${contract.status}"></td>
+        <!-- Füge bei Bedarf weitere Vertragsfelder hinzu -->
+        <td> <!-- Füge Aktionen für jeden Vertrag hinzu -->
+            <a th:href="@{'/viewContract/' + ${contract.id}}">Anzeigen</a>
+            <a th:href="@{'/editContract/' + ${contract.id}}">Bearbeiten</a>
+            <a class="delete" th:href="@{'/deleteContract/' + ${contract.id}}">Löschen</a>
+        </td>
+    </tr>
+</table>
+<a href="/addContract">Neuen Vertrag hinzufügen</a>
+<a class="zu" href="/member-dashboard">Zurück zum Mitglieder-Dashboard</a>
+
+</body>
+</html>

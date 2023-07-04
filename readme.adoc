@@ -1,0 +1,52 @@
+image:https://github.com/HOME-programming-lab/kickstart/actions/workflows/maven.yml/badge.svg["CI Build", link="https://github.com/HOME-programming-lab/kickstart/actions"]
+
+= Kickstart (hier sollte Ihr Projektname stehen)
+
+Dies ist das initiale Template für alle Software-Projekte die Java, Salespoint und Sprint verwenden.
+
+Bitte passen Sie das Template an Ihre team- und aufgabenspezifischen Erfordernisse anpassen. Als erstes sollen Sie Ihre Aufgabenstellung einpflegen!
+
+Folgendes ist enthalten:
+* eine minimale Java 17 Webanwendung auf der Basis von Spring Boot und dem Salespoint-Framework von der TU-Dresden (siehe die Ordner `src/main/java` und `src/test/java`)
+* vorbereitete Asciidoc-Templates für die zu erstellende Dokumentation `src/main/asciidoc`
+** Informationen über Asciidoc finden Sie link:https://asciidoctor.org/docs/asciidoc-writers-guide/[hier]!
+
+== Die folgenden Dokumente sind für Sie vorbereitet
+
+* link:src/main/asciidoc/protocols[Meeting-Protokolle]: eine Vorlage mit der Sie Ihre Meetings und deren Ergebnisse protokollieren können.
+* link:src/main/asciidoc/time_recording.adoc[Zeiterfassung]: eine Hilfestellung mit der Sie Ihre individuellen Arbeitszeiten erfassen können.
+* link:src/main/asciidoc/pflichtenheft.adoc[Anforderungsspezifikation (Pflichtenheft)]: ein Template für Ihr Pflichtenheft (Anforderungen).
+* link:src/main/asciidoc/developer_documentation.adoc[Entwicklerdokumentation (Software-Entwurf)]: ein Template mit dem Sie Ihre Entwicklerdokumentation erstellen können.
+
+== Struktur des Repositories
+
+Grundsätzlich entspricht die Projektstruktur dem Maven-Standardlayout. Sie finden daher die meisten wichtigen Artefakte unter `src/`:
+
+  src/
+  ├── main/
+  │   ├── asciidoc/   -- Hier befinden sich die Nachweisdokumente und Anwendungsdokumentation (Asciidoc format)
+  │   ├── java/       -- Hier befinden sich die Java-Quelldateien, in Java-Packages organisiert.
+  │   └── resources/  -- Statische Elemente (wie z.B. Abbildungen und Stylesheets), https://www.thymeleaf.org/[Thymeleaf-Templates], etc.
+  └── test/
+      └── java/       -- Die automatischen Unit- und Integrationstests werden in einem separatem Verzeichnis abgelegt. Das ermöglicht es uns, die Testfälle sauber von der eigentlichen Anwendung zu trennen. Die Testfälle werden am Besten mit dem link:https://junit.org/junit5/[JUnit-Framework] erstellt.
+
+Weitere Dateien, über die Sie stolpern werden:
+
+* `.gitignore`          -- In dieser Datei können Sie Git mitteilen, welche Dateien und Verzeichnisse nicht in das Repository eingecheckt werden sollen.
+* `pom.xml`             -- Dies ist die Maven Build-Spezifikation, Informationen zu diesem Format finden Sie in der link:https://maven.apache.org/index.html[Maven-Dokumentation].
+* `.editorconfig`       -- Erlaubt es, verschiedene Editoren mit identischen Grundeinstellungen zu versehen, z.B. bezüglich des Datei-Encodings, welches Sie standardmäßig am Besten auf UTF-8 stellen.
+* `mvnw` und `mvnw.cmd` -- Shell-Skripte, die Maven herunterladen, installieren und ausführen, wenn es sich noch nicht auf Ihrem System befindet.
+
+== Ausführen der Anwendung
+
+* In der IDE (Eclipse): suchen Sie `Application.java`, Rechtsklick auf das Projekt und dann "Run As > Java Application"
+* Von der Kommandozeile: `./mvnw spring-boot:run` ausführen
+
+== Paketierung
+
+Java-Anwendungen werden in der Regel als JAR-Dateien gepackt und ausgeliefert. Eine JAR-Datei kann von Javas virtueller Maschine direkt verarbeitet und ausgeführt werden, vorrausgesetzt in der JAR-Datei befindet sich eine Klasse mit einer `main`-Funktion. 
+
+Maven unterstützt Sie auch bei der Erstellung solcher Paketierungen:
+
+* Mittels `./mvnw clean package` erstellen Sie eine JAR-Datei im Build-Verzeichnis `target/`. 
+* Die erstelle JAR-Datei kann dann mittels `java -jar $jarName` ausgeführt werden (`$jarName` steht für den Namen der erstellten Datei).

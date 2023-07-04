@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vertragsdetails</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <style>
+    .zu{
+    background-color: lightseagreen;
+    }
+    .zu:hover {
+    background-color: #05857e
+    }
+    </style>
+</head>
+<body>
+    <h1>Vertragsdetails</h1>
+    <p><strong>ID:</strong> <span th:text="${contract.id}"></span></p>
+    <p><strong>Mitglied:</strong> <span th:if="${contract.member != null}" th:text="${contract.member.firstName + ' ' + contract.member.lastName}"></span></p>
+    <p><strong>Pakettyp:</strong> <span th:text="${contract.packageType}"></span></p>
+    <p><strong>Zahlungsdetails:</strong> <span th:text="${contract.paymentDetails}"></span></p>
+    <p><strong>Preis:</strong> <span th:text="${contract.price}"></span>€</p>
+    <p><strong>Startdatum:</strong> <span th:text="${contract.startDate}"></span></p>
+    <p><strong>Enddatum:</strong> <span th:text="${contract.endDate}"></span></p>
+    <p><strong>Status:</strong> <span th:text="${contract.status}"></span></p>
+    <!-- Weitere Vertragsdetails hinzufügen -->
+<a th:href="@{/contract/{id}/download(id=${contract.id})}" target="_blank">Rechnung als PDF herunterladen</a>
+
+<a class="zu" href="/contracts">Zurück zu den Verträgen</a>
+
+</body>
+</html>
